@@ -1,8 +1,13 @@
 import functions
 import PySimpleGUI as sg
 import time
+import os
 
-sg.theme("DarkTeal6")
+if not os.path.exists("todos.txt"):
+    with open("todos.txt", "w") as file:
+        pass
+
+sg.theme("Black")
 
 clock = sg.Text('', key='clock')
 label = sg.Text("Type in a to-do")
@@ -36,7 +41,7 @@ while True:
         case "Edit":
             try:
                 todo_to_edit = values['todos'][0]
-                new_todo = values['todo']
+                new_todo = values['todo'] + "\n"
 
                 todos = functions.get_todos()
                 index = todos.index(todo_to_edit)
@@ -61,7 +66,7 @@ while True:
             break
 
         case 'todos':
-            window['todo'].update(value=values['todos'][0])
+            window['todo'].update(value=values['todos'][0].strip('\n'))
 
         case sg.WIN_CLOSED:
             break
