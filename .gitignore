@@ -2,3 +2,5 @@
 .idea
 journal
 files
+build
+dist
